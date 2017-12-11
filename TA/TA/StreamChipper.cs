@@ -73,7 +73,7 @@ namespace TA
             {
                 for (int j = img.DefBlok[n].M; j < img.DefBlok[n].M +3 ; j++)
                 {
-                    img.Img.SetPixel(i, j, Color.FromArgb(img.Img.GetPixel(i, j) ^ key));           
+                    //img.Img.SetPixel(i, j, Color.FromArgb(img.Img.GetPixel(i, j) ^ key));           
                 }
             }
         }
