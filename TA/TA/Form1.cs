@@ -15,8 +15,8 @@ namespace TA
         public Form1()
         {
             InitializeComponent();
-            DateTime dt = DateTime.Today;
-
+            DateTime dt = DateTime.Now;
+            tbDate.Text = dt.ToString();
             
         }
 
