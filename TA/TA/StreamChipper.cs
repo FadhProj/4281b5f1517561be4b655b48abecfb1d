@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TA
 {
@@ -50,16 +51,30 @@ namespace TA
         }
 
         //Prosedure Pembangkitan Kunci Random
-        public void PRGA()
+        public void PRGA(ref Iimage img)
         {
             int i = 0;
             int j = 0;
-            for (int n = 0; n < 10; n++) //perlu di ubah!!
+            int key;
+            for (int n = 0; n < img.Blok; n++) //perlu di ubah!!
             {
                 i = (j + 1) % 256;
                 j = (j + S[i]) % 256;
                 swap(i, j);
+                key = S[(S[i] + S[j]) % 256];
                 //XOR blok
+
+            }
+        }
+
+        public void xorBlok(ref Iimage img, int key, int n)
+        { 
+            for (int i = img.DefBlok[n].N; i < img.DefBlok[n].N +3 ; i++)
+            {
+                for (int j = img.DefBlok[n].M; j < img.DefBlok[n].M +3 ; j++)
+                {
+                    img.Img.SetPixel(i, j, Color.FromArgb(img.Img.GetPixel(i, j) ^ key));           
+                }
             }
         }
     }
