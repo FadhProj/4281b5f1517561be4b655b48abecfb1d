@@ -16,6 +16,7 @@ namespace TA
     {
         DateTime dt;
         Bitmap g;
+        Iimage imgOri, imgClone;
         public Form1()
         {
             InitializeComponent();
@@ -45,28 +46,15 @@ namespace TA
             }
 
             // menampilkan value perpixel
-            BitmapData data = g.LockBits(new Rectangle(0, 0, g.Width, g.Height), ImageLockMode.ReadWrite, g.PixelFormat);
-            unsafe
-            {
-                Console.WriteLine(Bitmap.GetPixelFormatSize(g.PixelFormat) / 8);
+            
 
-                byte* ptr = (byte*)data.Scan0;
-                for (int j = 0; j < data.Height; j++)
-                {
-                    Console.Write("Baris ke {0} : ", j);
-                    for (int i = 0; i < data.Width; i++)
-                    {
-
-                        Console.Write(" K : {0} ; pix : {1} ", i, ptr[i]);
-                        //Console.Write(ptr[i]);
-
-                    }
-                    Console.WriteLine();
-                }
-            }
-
-            g.UnlockBits(data);
-            Console.WriteLine(g.Size);
+            imgOri = new Iimage(g);
+            imgClone = imgOri;
+            Encryption E = new Encryption("123123", ref imgClone);
+            pbShow.Image = imgClone.Image;
+            
+            
+            Console.WriteLine("g size {0} ",g.Size);
         }
     }
 }
