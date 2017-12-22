@@ -24,34 +24,59 @@ namespace TA
             public int N { get => n; set => n = value; }
         }
         
-        private Bitmap img;
+        private Bitmap image;
         private int blok;
         private Pos[] defBlok;
 
-        public Bitmap Img { get => img; }
+        public Bitmap Image { get => image; }
         public int Blok { get => blok; }
         internal Pos[] DefBlok { get => defBlok; }
 
-        public Iimage(Bitmap img)
-        {
-            this.img = img;
-            blok = ((this.img.Height * this.img.Width) / 9);
+        public Iimage(Bitmap image)
+        {            
+            this.image = image;
+            Console.WriteLine(this.image.Size);            
+            addPadding();
+            blok = ((this.image.Height * this.image.Width) / 9);
             defBlok = new Pos[blok];
-            setDefBlok(img);
+            Console.WriteLine(this.image.Size);
+            setDefBlok(this.image);
+            
         }
 
 
-        public void setDefBlok(Bitmap img)
+        public void setDefBlok(Bitmap image)
         {
-            //blok = 0;
-            for (int i = 0; i < img.Height; i+=3)
+            int b = 0;
+            Console.WriteLine("blok {0} Width {1} Height {2} ", blok, image.Width, image.Height);
+            for (int i = 0; i < image.Height; i+=3)
             {
-                for (int j = 0; j < img.Width; j+=3)
+                for (int j = 0; j < image.Width; j+=3)
                 {
-                    defBlok[blok] = new Pos(j, i);
-                   // blok++;
+                    defBlok[b] = new Pos(j, i);
+                    b++;
                 }
             }
+        }
+
+        public void addPadding()
+        {
+            int x = image.Width + (3 - (image.Width % 3)), y = image.Height + (3 - (image.Height % 3));
+            Bitmap result = new Bitmap(x, y);
+            using (Graphics graph = Graphics.FromImage(result))
+            {
+                Rectangle ImageSize = new Rectangle(0, 0, x, y);
+                graph.FillRectangle(Brushes.Black, ImageSize);
+            }
+            for (int i = 0; i < image.Height; i++)
+            {
+                for (int j = 0; j < image.Width; j++)
+                {
+                    result.SetPixel(j, i, image.GetPixel(j, i));
+                }
+            }
+            Console.WriteLine(result.Size);
+            this.image = result;
         }
 
 
