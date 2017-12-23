@@ -35,11 +35,9 @@ namespace TA
         public Iimage(Bitmap image)
         {            
             this.image = image;
-            Console.WriteLine(this.image.Size);            
             addPadding();
             blok = ((this.image.Height * this.image.Width) / 9);
             defBlok = new Pos[blok];
-            Console.WriteLine(this.image.Size);
             setDefBlok(this.image);
             
         }
@@ -48,7 +46,6 @@ namespace TA
         public void setDefBlok(Bitmap image)
         {
             int b = 0;
-            Console.WriteLine("blok {0} Width {1} Height {2} ", blok, image.Width, image.Height);
             for (int i = 0; i < image.Height; i+=3)
             {
                 for (int j = 0; j < image.Width; j+=3)
@@ -61,7 +58,20 @@ namespace TA
 
         public void addPadding()
         {
-            int x = image.Width + (3 - (image.Width % 3)), y = image.Height + (3 - (image.Height % 3));
+            int x = image.Width , y = image.Height ;
+            if (image.Width % 3 != 0 && image.Height % 3 != 0)
+            {
+                x = image.Width + (3 - (image.Width % 3));
+                y = image.Height + (3 - (image.Height % 3));
+            }
+            else if (image.Width % 3 != 0)
+            {
+                x = image.Width + (3 - (image.Width % 3));
+            }
+            else if (image.Height % 3 != 0)
+            {
+                y = image.Height + (3 - (image.Height % 3));
+            }
             Bitmap result = new Bitmap(x, y);
             using (Graphics graph = Graphics.FromImage(result))
             {
@@ -75,7 +85,6 @@ namespace TA
                     result.SetPixel(j, i, image.GetPixel(j, i));
                 }
             }
-            Console.WriteLine(result.Size);
             this.image = result;
         }
 

@@ -63,46 +63,25 @@ namespace TA
                 swap(i, j);
                 key = S[(S[i] + S[j]) % 256];
                 //XOR blok
-                //Random rnd = new Random();
-                //Console.WriteLine(img.Image.Size);
                 xorBlok(ref img, key, n);
-
-                /*for (int y = 0; y < img.Image.Height; y++)
-                {
-                    for (int x = 0; x < img.Image.Width; x++)
-                    {
-                        Console.Write( "{0} {1} ",x, y);
-                        R = img.Image.GetPixel(x , y).R ^ key;
-                        G = img.Image.GetPixel(x, y).G ^ key;
-                        B = img.Image.GetPixel(x, y).B ^ key;
-                        //Console.Write("Pixel ke {0} {1} {2} : ", j, i, g.GetPixel(j,i));
-                        img.Image.SetPixel(x, y, Color.FromArgb((byte)R, (byte)G, (byte)B));
-                    }
-                    Console.WriteLine("");
-                }*/
-
             }
         }
 
         public void xorBlok(ref Iimage img, int key, int n)
         {
+            //Console.WriteLine("xor {0} ", n);
             int R, G, B;
-            //Console.Write("N {0} ", n);
             for (int i = img.DefBlok[n].N; i < img.DefBlok[n].N +3 ; i++)
             {
                 for (int j = img.DefBlok[n].M; j < img.DefBlok[n].M +3 ; j++)
                 {
-                    //img.Img.SetPixel(i, j, Color.FromArgb(img.Img.GetPixel(i, j) ^ key));
-                    //Console.Write(" {0} {1} ", j , i );
                     R = img.Image.GetPixel(j, i).R ^ key;
                     G = img.Image.GetPixel(j, i).G ^ key;
                     B = img.Image.GetPixel(j, i).B ^ key;
-                    //Console.Write("Pixel ke {0} {1} {2} : ", j, i, g.GetPixel(j,i));
-                    img.Image.SetPixel(j, i, Color.FromArgb((byte)R, (byte)G, (byte)B));
+                   img.Image.SetPixel(j, i, Color.FromArgb((byte)R, (byte)G, (byte)B));
                 }
                 
             }
-            //Console.WriteLine("");
         }
     }
 }

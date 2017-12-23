@@ -16,7 +16,7 @@ namespace TA
     {
         DateTime dt;
         Bitmap g;
-        Iimage imgOri, imgClone;
+        Iimage imgOri, imgClone,imageDec;
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +35,15 @@ namespace TA
 
         }
 
+        private void btDecrypt_Click(object sender, EventArgs e)
+        {
+            imageDec = new Iimage(imgClone.Image);
+            Decryption D = new Decryption();
+            pbLoad.Image = (Image)g;//imgOri.Image;
+            pbShow.Image = D.decryptImage("123123", imageDec).Image;
+
+        }
+
         private void btOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -49,9 +58,11 @@ namespace TA
             
 
             imgOri = new Iimage(g);
-            imgClone = imgOri;
+            imgClone = new Iimage(imgOri.Image);
             Encryption E = new Encryption("123123", ref imgClone);
-            pbShow.Image = imgClone.Image;
+            //pbShow.Image = imgClone.Image;
+            pbShow.Image = E.StreamImage.Image;
+            pbLoad.Image = E.PermutedImage.Image;
             
             
             Console.WriteLine("g size {0} ",g.Size);
