@@ -32,6 +32,7 @@
             this.pbLoad = new System.Windows.Forms.PictureBox();
             this.btOpen = new System.Windows.Forms.Button();
             this.pbShow = new System.Windows.Forms.PictureBox();
+            this.btDecrypt = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbLoad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbShow)).BeginInit();
             this.SuspendLayout();
@@ -70,16 +71,27 @@
             this.pbShow.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pbShow.Location = new System.Drawing.Point(499, 26);
             this.pbShow.Name = "pbShow";
-            this.pbShow.Size = new System.Drawing.Size(422, 459);
+            this.pbShow.Size = new System.Drawing.Size(480, 459);
             this.pbShow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbShow.TabIndex = 4;
             this.pbShow.TabStop = false;
+            // 
+            // btDecrypt
+            // 
+            this.btDecrypt.Location = new System.Drawing.Point(498, 491);
+            this.btDecrypt.Name = "btDecrypt";
+            this.btDecrypt.Size = new System.Drawing.Size(101, 23);
+            this.btDecrypt.TabIndex = 5;
+            this.btDecrypt.Text = "Decrypt";
+            this.btDecrypt.UseVisualStyleBackColor = true;
+            this.btDecrypt.Click += new System.EventHandler(this.btDecrypt_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 513);
+            this.ClientSize = new System.Drawing.Size(1019, 513);
+            this.Controls.Add(this.btDecrypt);
             this.Controls.Add(this.pbShow);
             this.Controls.Add(this.btOpen);
             this.Controls.Add(this.pbLoad);
@@ -100,6 +112,7 @@
         private System.Windows.Forms.PictureBox pbLoad;
         private System.Windows.Forms.Button btOpen;
         private System.Windows.Forms.PictureBox pbShow;
+        private System.Windows.Forms.Button btDecrypt;
     }
 }
 
