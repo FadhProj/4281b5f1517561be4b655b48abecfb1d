@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Decryption.cs" />
+    <Compile Include="Embending.cs" />
     <Compile Include="Encryption.cs" />
+    <Compile Include="Extraction.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
