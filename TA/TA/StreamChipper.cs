@@ -69,7 +69,6 @@ namespace TA
 
         public void xorBlok(ref Iimage img, int key, int n)
         {
-            //Console.WriteLine("xor {0} ", n);
             int R, G, B;
             for (int i = img.DefBlok[n].N; i < img.DefBlok[n].N +3 ; i++)
             {

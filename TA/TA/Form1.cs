@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections;
 
 namespace TA
 {
@@ -17,6 +18,8 @@ namespace TA
         DateTime dt;
         Bitmap g;
         Iimage imgOri, imgClone,imageDec;
+        ArrayList L = new ArrayList();
+
         public Form1()
         {
             InitializeComponent();
@@ -40,7 +43,7 @@ namespace TA
             imageDec = new Iimage(imgClone.Image);
             Decryption D = new Decryption();
             pbLoad.Image = (Image)g;//imgOri.Image;
-            pbShow.Image = D.decryptImage("123123", imageDec).Image;
+            pbShow.Image = D.decryptImage("123123", imageDec,L).Image;
 
         }
 
@@ -60,9 +63,8 @@ namespace TA
             imgOri = new Iimage(g);
             imgClone = new Iimage(imgOri.Image);
             Encryption E = new Encryption("123123", ref imgClone);
-            //pbShow.Image = imgClone.Image;
-            pbShow.Image = E.StreamImage.Image;
-            pbLoad.Image = E.PermutedImage.Image;
+            L = E.L1;
+            pbShow.Image = imgClone.Image;
             
             
             Console.WriteLine("g size {0} ",g.Size);
