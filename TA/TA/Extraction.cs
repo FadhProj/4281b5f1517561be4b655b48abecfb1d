@@ -66,9 +66,9 @@ namespace TA
         {
             List<Byte> byteList = new List<Byte>();
 
-            for (int i = 0; i < data.Length; i += 8)
+            for (int i = 0; i < data.Length - (data.Length % 8) ; i += 8)
             {
-                byteList.Add(Convert.ToByte(data.Substring(i, 8), 2));
+                byteList.Add(Convert.ToByte(data.Substring(i, 8), 2) );
             }
             return Encoding.ASCII.GetString(byteList.ToArray());
         }
@@ -89,6 +89,17 @@ namespace TA
                         int Cij = (img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B) / 3;
                         int Ci1 = (img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N).R + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N).G + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N).B) / 3; ;
                         diff = Cij - Ci1;
+                        if (diff == 0 || diff == -1)
+                        {
+                            //Console.Write("0 ");
+                            b += "0";
+
+                        }
+                        else if (diff == 1 || diff == -2)
+                        {
+                            //Console.Write("1 ");
+                            b += "1";
+                        }
                         if (diff > 0)
                         {
                             img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R - 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G - 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B - 1));
@@ -98,24 +109,14 @@ namespace TA
                             img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + 1));
                         }
 
-                        if (diff == 0 || diff == -1)
-                        {
-                            Console.Write("0 ");
-                            b += "0";
-                            
-                        }
-                        else if (diff == 1 || diff == -2)
-                        {
-                            Console.Write("1 ");
-                            b += "1";
-                        }
+                        
                        
                     }
                 }
             }
-           // Console.WriteLine(b);
+            Console.WriteLine(b);
             msg = BinaryToString(b);
-            Console.WriteLine(msg);
+            //Console.WriteLine(msg);
 
         }
     }
