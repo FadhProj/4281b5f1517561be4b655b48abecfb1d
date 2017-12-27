@@ -83,7 +83,7 @@ namespace TA
             int b = 0;
             int diff;
             string binMsg = tobin(msg);
-            Console.WriteLine(binMsg);
+            Console.WriteLine(binMsg.Length);
 
             for (int blok = 0; blok < img.Blok; blok++)
             {
@@ -103,19 +103,27 @@ namespace TA
                         {
                             if (n < binMsg.Length)
                             {
+                                //Console.Write(binMsg[n]);
                                 b = (int)binMsg[n] - 48;
+                                Console.Write(b);
                                 img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R - b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G - b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B - b));
                                 n++;
-                            }                            
+                            }else
+                                img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + 0));
+
                         }
                         else if (diff == 0)
                         {
+
                             if (n < binMsg.Length)
                             {
+                                //Console.Write(binMsg[n]);
                                 b = (int)binMsg[n] - 48;
+                                Console.Write(b);
                                 img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + b));
                                 n++;
-                            }
+                            }else
+                                img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + 0));
                         }
                         else if (diff > 0)
                         {
@@ -124,6 +132,7 @@ namespace TA
                     }
                 }
             }
+            Console.WriteLine("");
             Console.WriteLine(binMsg);
 
         }
