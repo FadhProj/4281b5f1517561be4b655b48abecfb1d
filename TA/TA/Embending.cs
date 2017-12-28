@@ -82,6 +82,7 @@ namespace TA
             int n = 0;
             int b = 0;
             int diff;
+
             string binMsg = tobin(msg);
             Console.WriteLine(binMsg.Length);
 
@@ -91,48 +92,60 @@ namespace TA
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        
-                        int Cij = (img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B) / 3  ;
-                        int Ci1 = (img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N).R + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N).G + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N).B) / 3; ;
-                        diff = Cij - Ci1;
-                        if (diff < -1)
-                        {
-                            img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R - 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G - 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B - 1));
-                        }
-                        else if (diff == 1)
-                        {
-                            if (n < binMsg.Length)
-                            {
-                                //Console.Write(binMsg[n]);
-                                b = (int)binMsg[n] - 48;
-                                Console.Write(b);
-                                img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R - b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G - b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B - b));
-                                n++;
-                            }else
-                                img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + 0));
-
-                        }
-                        else if (diff == 0)
+                        if (!(i == 0 && j == 0))
                         {
 
-                            if (n < binMsg.Length)
+                            int Cij = (img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B) / 3;
+                            int Ci1 = (img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).R + img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).G + img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).B) / 3; ;
+                            diff = Cij - Ci1;
+                            //Console.Write(" blok {0} N {1} M {2} diff {3} Cij {4} Ci1 {5} || ", blok, img.DefBlok[blok].N+i, img.DefBlok[blok].M+j, diff, Cij, Ci1);
+                            if (diff < -1)
                             {
-                                //Console.Write(binMsg[n]);
-                                b = (int)binMsg[n] - 48;
-                                Console.Write(b);
-                                img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + b));
-                                n++;
-                            }else
-                                img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + 0));
-                        }
-                        else if (diff > 0)
-                        {
-                            img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + 1));
+                                img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R - 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G - 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B - 1));
+                            }
+                            else if (diff == -1)
+                            {
+                                if (n < binMsg.Length)
+                                {
+                                    //Console.Write(" blok {0} M {1} N {2} msg {3} diff {4}  || ", blok, j, i, binMsg[n], diff);
+                                    b = (int)binMsg[n] - 48;
+                                    //Console.Write(b);
+                                    img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R - b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G - b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B - b));
+                                    n++;
+                                }
+                                else
+                                    img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + 0));
+
+                            }
+                            else if (diff == 0)
+                            {
+
+                                if (n < binMsg.Length)
+                                {
+                                    //Console.Write(" blok {0} M {1} N {2} msg {3} diff {4}  || ", blok, j, i, binMsg[n], diff);
+                                    //Console.Write(binMsg[n]);
+                                    b = (int)binMsg[n] - 48;
+                                    //Console.Write(b);
+                                    img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + b, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + b));
+                                    n++;
+                                }
+                                else
+                                    img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + 0, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + 0));
+                            }
+                            else if (diff > 0)
+                            {
+                                img.Image.SetPixel(j, i, Color.FromArgb(img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + 1, img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B + 1));
+                            }
+                            Cij = (img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B) / 3;
+                            Ci1 = (img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).R + img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).G + img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).B) / 3; ;
+                            diff = Cij - Ci1;
+                            Console.Write("a blok {0} N {1} M {2} diff {3} Cij {4} Ci1 {5} || ", blok, img.DefBlok[blok].N + i, img.DefBlok[blok].M + j, diff, Cij, Ci1);
+
                         }
                     }
                 }
+               // Console.WriteLine("");
             }
-            Console.WriteLine("");
             Console.WriteLine(binMsg);
 
         }

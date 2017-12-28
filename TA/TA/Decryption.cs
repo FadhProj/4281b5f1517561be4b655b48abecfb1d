@@ -20,7 +20,7 @@ namespace TA
         {
             // extraction
             Extraction ex = new Extraction(ref image, L, ref msg);
-            Console.WriteLine(msg);
+            //Console.WriteLine(msg);
             //permutation
             Permutation p = new Permutation(ref image,true);
 
