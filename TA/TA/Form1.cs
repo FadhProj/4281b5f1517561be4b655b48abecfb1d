@@ -41,9 +41,31 @@ namespace TA
         private void btDecrypt_Click(object sender, EventArgs e)
         {
             imageDec = new Iimage(imgClone.Image);
+            Iimage img = imgClone;
             Decryption D = new Decryption();
             pbLoad.Image = (Image)g;//imgOri.Image;
-            pbShow.Image = D.decryptImage("123123", imageDec,L).Image;
+            int diff;
+            for (int blok = 0; blok < img.Blok; blok++)
+            {
+                //Console.WriteLine("{0} {1} ",n,binMsg.Length);                
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (!(i == 0 && j == 0))
+                        {
+                            int Cij = (img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B) / 3;
+                            int Ci1 = (img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).R + img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).G + img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).B) / 3; ;
+                            diff = Cij - Ci1;
+                            Console.Write("b blok {0} N {1} M {2} diff {3} Cij {4} Ci1 {5} || ", blok, img.DefBlok[blok].N + i, img.DefBlok[blok].M + j, diff, Cij, Ci1);
+
+                        }
+                    }
+                }
+                Console.WriteLine("");
+            }
+            Console.WriteLine("=================================================================================================");
+            pbShow.Image = D.decryptImage("123123", imgClone, L).Image;
 
         }
 

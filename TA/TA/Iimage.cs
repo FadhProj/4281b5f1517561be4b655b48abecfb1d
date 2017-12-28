@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Collections;
 
 namespace TA
 {
@@ -39,6 +40,7 @@ namespace TA
             blok = ((this.image.Height * this.image.Width) / 9);
             defBlok = new Pos[blok];
             setDefBlok(this.image);
+           
             
         }
 
@@ -46,14 +48,15 @@ namespace TA
         public void setDefBlok(Bitmap image)
         {
             int b = 0;
-            for (int i = 0; i < image.Height; i+=3)
+            for (int i = 0; i < image.Height; i += 3)
             {
-                for (int j = 0; j < image.Width; j+=3)
+                for (int j = 0; j < image.Width; j += 3)
                 {
                     defBlok[b] = new Pos(j, i);
                     b++;
                 }
             }
+
         }
 
         public void addPadding()
