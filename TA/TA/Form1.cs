@@ -13,14 +13,15 @@ using System.Collections;
 
 namespace TA
 {
-    public partial class Form1 : Form
+    public partial class win1 : Form
     {
         DateTime dt;
         Bitmap g;
         Iimage imgOri, imgClone,imageDec;
         ArrayList L = new ArrayList();
+        string key;
 
-        public Form1()
+        public win1()
         {
             InitializeComponent();
             dt = DateTime.Now;
@@ -38,34 +39,25 @@ namespace TA
 
         }
 
+        private void btEncrypt_Click(object sender, EventArgs e)
+        {
+            imgOri = new Iimage(g);
+            imgClone = imgOri;
+            Encryption E = new Encryption(key, ref imgClone);
+            L = E.L1;
+            pbShow.Image = imgClone.Image;
+
+
+            Console.WriteLine("g size {0} ", g.Size);
+        }
+
         private void btDecrypt_Click(object sender, EventArgs e)
         {
-            imageDec = new Iimage(imgClone.Image);
-            Iimage img = imgClone;
+            //imageDec = new Iimage(imgClone.Image);
+             imageDec = imgClone;
             Decryption D = new Decryption();
             pbLoad.Image = (Image)g;//imgOri.Image;
-            int diff;
-            for (int blok = 0; blok < img.Blok; blok++)
-            {
-                //Console.WriteLine("{0} {1} ",n,binMsg.Length);                
-                for (int i = 0; i < 3; i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (!(i == 0 && j == 0))
-                        {
-                            int Cij = (img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).R + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).G + img.Image.GetPixel(img.DefBlok[blok].M + j, img.DefBlok[blok].N + i).B) / 3;
-                            int Ci1 = (img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).R + img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).G + img.Image.GetPixel(img.DefBlok[blok].M, img.DefBlok[blok].N).B) / 3; ;
-                            diff = Cij - Ci1;
-                            Console.Write("b blok {0} N {1} M {2} diff {3} Cij {4} Ci1 {5} || ", blok, img.DefBlok[blok].N + i, img.DefBlok[blok].M + j, diff, Cij, Ci1);
-
-                        }
-                    }
-                }
-                Console.WriteLine("");
-            }
-            Console.WriteLine("=================================================================================================");
-            pbShow.Image = D.decryptImage("123123", imgClone, L).Image;
+           pbShow.Image = D.decryptImage(key, imageDec, L).Image;
 
         }
 
@@ -78,18 +70,43 @@ namespace TA
                 pbLoad.Image = new Bitmap(open.FileName);
                 g = (Bitmap) pbLoad.Image;
             }
-
-            // menampilkan value perpixel
+            if (txKey.Text.Equals(""))
+                key = "198563";
+            else
+                key = txKey.Text;
             
+            PropertyItem[] prop = g.PropertyItems;
+            int count = 0;
+            Console.WriteLine(prop.Length);
+            foreach(PropertyItem p in prop)
+            {
+                Console.WriteLine("Property Item " + count.ToString());
 
+                Console.WriteLine("iD: 0x" + p.Id.ToString("x"));
+                Console.WriteLine("len: " + p.Len.ToString());
+                Console.WriteLine("type: " + p.Type.ToString());
+
+                count++;
+
+                //Console.WriteLine("{0} {1} {2} {3} ",p.Id,p.Len,p.Type,p.Value[0].GetType());
+                //p.Value[1] = Convert.ToByte("10000");
+                //foreach (var item in p.Value)
+                //{
+                //    Console.WriteLine("{0} ",Encoding.ASCII.GetString(item));
+                //    //Console.WriteLine("p ");
+                //}
+                Console.Write("{0} ");
+                
+
+            }
+            /*Console.WriteLine("{0} {1} ", g.Width, g.Height);
             imgOri = new Iimage(g);
-            imgClone = new Iimage(imgOri.Image);
-            Encryption E = new Encryption("123123", ref imgClone);
-            L = E.L1;
-            pbShow.Image = imgClone.Image;
-            
-            
-            Console.WriteLine("g size {0} ",g.Size);
+            pbShow.Image = imgOri.Image;
+            Console.WriteLine("{0} {1} ", imgOri.Image.Width, imgOri.Image.Height);*/
+
+
+
+
         }
     }
 }
