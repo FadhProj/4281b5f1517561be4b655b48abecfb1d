@@ -69,18 +69,30 @@ namespace TA
 
         public void xorBlok(ref Iimage img, int key, int n)
         {
-            int R, G, B;
+            int R, G, B, a = 0;
+            string ke = Convert.ToString(key, 2);
+            //Console.WriteLine(ke);
+            //Console.WriteLine(ke[a]);
             for (int i = img.DefBlok[n].N; i < img.DefBlok[n].N +3 ; i++)
             {
                 for (int j = img.DefBlok[n].M; j < img.DefBlok[n].M +3 ; j++)
                 {
-                    R = img.Image.GetPixel(j, i).R ^ key;
-                    G = img.Image.GetPixel(j, i).G ^ key;
-                    B = img.Image.GetPixel(j, i).B ^ key;
-                   img.Image.SetPixel(j, i, Color.FromArgb((byte)R, (byte)G, (byte)B));
+                    /*R = img.Image.GetPixel(j, i).R;
+                    G = img.Image.GetPixel(j, i).G;
+                    B = img.Image.GetPixel(j, i).B;
+                    Console.WriteLine("1 {0} {1} {2}", R, G, B);
+                    */
+                    R = img.Image.GetPixel(j, i).R ^ ke[a % ke.Length] - 48;
+                    G = img.Image.GetPixel(j, i).G ^ ke[a % ke.Length] - 48;
+                    B = img.Image.GetPixel(j, i).B ^ ke[a % ke.Length] - 48;
+                    //Console.WriteLine("2 {0} {1} {2}", R, G, B);
+
+                    img.Image.SetPixel(j, i, Color.FromArgb((byte)R, (byte)G, (byte)B));
+                    a++;
                 }
                 
             }
         }
+        
     }
 }

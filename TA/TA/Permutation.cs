@@ -20,7 +20,7 @@ namespace TA
             for (int i = 0; i < image.Blok; i++)
             {
                 //Console.WriteLine(i);
-                z = BigInteger.Pow(5, (i + 69) % (image.Blok + 70));
+                z = BigInteger.Pow(5, (i + 69) % (p-2));
                 d =  z % p;
                 if (d < image.Blok)
                 {
@@ -37,7 +37,7 @@ namespace TA
             for (int i = image.Blok-1 ; i >= 0 ; i--)
             {
                 //Console.WriteLine(i);
-                z = BigInteger.Pow(5, (i + 69) % (image.Blok + 70));
+                z = BigInteger.Pow(5, (i + 69) % (p-2));
                 d = z % p;
                 if (d < image.Blok)
                 {
@@ -106,7 +106,7 @@ namespace TA
 
         public int primeNumber(int number)
         {
-            for (int i = number; i < number + 100; i++)
+            for (int i = number; i > 0; i--)
             {
                 if (this.isPrime(i))
                 {

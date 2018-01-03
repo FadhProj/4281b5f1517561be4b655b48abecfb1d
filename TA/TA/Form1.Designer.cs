@@ -1,6 +1,6 @@
 ﻿namespace TA
 {
-    partial class Form1
+    partial class win1
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,9 @@
             this.btOpen = new System.Windows.Forms.Button();
             this.pbShow = new System.Windows.Forms.PictureBox();
             this.btDecrypt = new System.Windows.Forms.Button();
+            this.txKey = new System.Windows.Forms.TextBox();
+            this.btEncrypt = new System.Windows.Forms.Button();
+            this.lbKey = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbLoad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbShow)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +61,7 @@
             // 
             // btOpen
             // 
-            this.btOpen.Location = new System.Drawing.Point(391, 491);
+            this.btOpen.Location = new System.Drawing.Point(391, 488);
             this.btOpen.Name = "btOpen";
             this.btOpen.Size = new System.Drawing.Size(101, 23);
             this.btOpen.TabIndex = 3;
@@ -78,7 +81,7 @@
             // 
             // btDecrypt
             // 
-            this.btDecrypt.Location = new System.Drawing.Point(498, 491);
+            this.btDecrypt.Location = new System.Drawing.Point(878, 488);
             this.btDecrypt.Name = "btDecrypt";
             this.btDecrypt.Size = new System.Drawing.Size(101, 23);
             this.btDecrypt.TabIndex = 5;
@@ -86,18 +89,50 @@
             this.btDecrypt.UseVisualStyleBackColor = true;
             this.btDecrypt.Click += new System.EventHandler(this.btDecrypt_Click);
             // 
-            // Form1
+            // txKey
+            // 
+            this.txKey.Location = new System.Drawing.Point(985, 43);
+            this.txKey.Name = "txKey";
+            this.txKey.Size = new System.Drawing.Size(173, 20);
+            this.txKey.TabIndex = 6;
+            this.txKey.Tag = "";
+            this.txKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btEncrypt
+            // 
+            this.btEncrypt.Location = new System.Drawing.Point(763, 489);
+            this.btEncrypt.Name = "btEncrypt";
+            this.btEncrypt.Size = new System.Drawing.Size(109, 23);
+            this.btEncrypt.TabIndex = 7;
+            this.btEncrypt.Text = "Encrypt";
+            this.btEncrypt.UseVisualStyleBackColor = true;
+            this.btEncrypt.Click += new System.EventHandler(this.btEncrypt_Click);
+            // 
+            // lbKey
+            // 
+            this.lbKey.AutoSize = true;
+            this.lbKey.Location = new System.Drawing.Point(985, 26);
+            this.lbKey.Name = "lbKey";
+            this.lbKey.Size = new System.Drawing.Size(25, 13);
+            this.lbKey.TabIndex = 8;
+            this.lbKey.Text = "Key";
+            // 
+            // win1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1019, 513);
+            this.BackColor = System.Drawing.Color.SkyBlue;
+            this.ClientSize = new System.Drawing.Size(1165, 513);
+            this.Controls.Add(this.lbKey);
+            this.Controls.Add(this.btEncrypt);
+            this.Controls.Add(this.txKey);
             this.Controls.Add(this.btDecrypt);
             this.Controls.Add(this.pbShow);
             this.Controls.Add(this.btOpen);
             this.Controls.Add(this.pbLoad);
             this.Controls.Add(this.tbDate);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "win1";
+            this.Text = "Tugas Akhirku";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbLoad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbShow)).EndInit();
@@ -113,6 +148,9 @@
         private System.Windows.Forms.Button btOpen;
         private System.Windows.Forms.PictureBox pbShow;
         private System.Windows.Forms.Button btDecrypt;
+        private System.Windows.Forms.TextBox txKey;
+        private System.Windows.Forms.Button btEncrypt;
+        private System.Windows.Forms.Label lbKey;
     }
 }
 

@@ -16,6 +16,8 @@ namespace TA
 
         public Encryption(String Key,ref Iimage img)
         {
+            //addPadding
+            img.addPadding(false);
             //streamEncryption
             StreamChipper sc = new StreamChipper(Key);
             sc.PRGA(ref img);
@@ -28,7 +30,17 @@ namespace TA
             //Embending
             Embending em = new Embending(ref img,"Hello World");
             L = em.L1;
-            
+
+            //closePadding
+            img.closePadding(true);
+            for (int i = 0; i < img.ValPadW.Length; i++)
+            {
+                Console.Write(img.ValPadW[i]);
+            }
+            Console.WriteLine("");
+
+
+
 
 
         }
