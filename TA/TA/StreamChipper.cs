@@ -35,7 +35,7 @@ namespace TA
             for (int i = 0; i < 256; i++)
             {
                 K[i] = key[i % key.Length];
-                S[i] = i;
+                S[i] = i % 9;
             }
         }
 
@@ -65,34 +65,39 @@ namespace TA
                 //XOR blok
                 xorBlok(ref img, key, n);
             }
+            Console.WriteLine("+++");
+
         }
 
         public void xorBlok(ref Iimage img, int key, int n)
         {
             int R, G, B, a = 0;
-            string ke = Convert.ToString(key, 2);
+            //string ke = Convert.ToString(key, 2);
             //Console.WriteLine(ke);
             //Console.WriteLine(ke[a]);
+            Console.WriteLine("Xor Blok");
             for (int i = img.DefBlok[n].N; i < img.DefBlok[n].N +3 ; i++)
             {
                 for (int j = img.DefBlok[n].M; j < img.DefBlok[n].M +3 ; j++)
                 {
-                    /*R = img.Image.GetPixel(j, i).R;
+                    R = img.Image.GetPixel(j, i).R;
                     G = img.Image.GetPixel(j, i).G;
                     B = img.Image.GetPixel(j, i).B;
-                    Console.WriteLine("1 {0} {1} {2}", R, G, B);
-                    */
-                    R = img.Image.GetPixel(j, i).R ^ ke[a % ke.Length] - 48;
-                    G = img.Image.GetPixel(j, i).G ^ ke[a % ke.Length] - 48;
-                    B = img.Image.GetPixel(j, i).B ^ ke[a % ke.Length] - 48;
+                    
+                    Console.Write("st X {0} Y {1} R {2} G {3} B {4} Key {5} || ",j,i, R, G, B,key);
+                    R = img.Image.GetPixel(j, i).R ^ key;//ke[a % ke.Length] - 48;
+                    G = img.Image.GetPixel(j, i).G ^ key;//ke[a % ke.Length] - 48;
+                    B = img.Image.GetPixel(j, i).B ^ key;//ke[a % ke.Length] - 48;
                     //Console.WriteLine("2 {0} {1} {2}", R, G, B);
 
                     img.Image.SetPixel(j, i, Color.FromArgb((byte)R, (byte)G, (byte)B));
                     a++;
                 }
-                
+                Console.WriteLine("");
             }
+            Console.WriteLine("===");
+
         }
-        
+
     }
 }
