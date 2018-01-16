@@ -38,8 +38,36 @@ namespace TA
 
         }
 
-
         public void histShiffting(ref Iimage img)
+        {
+            int R, G, B;
+            for (int y = 0; y < img.Image.Height; y++)
+            {
+                for (int x = 0; x < img.Image.Width; x++)
+                {
+                    R = img.Image.GetPixel(x, y).R;
+                    G = img.Image.GetPixel(x, y).G;
+                    B = img.Image.GetPixel(x, y).B;
+                    //Console.WriteLine("1 X {0} Y {1} R {2} G {3} B {4} || ", x, y, R, G, B);
+                    if (R == 0)
+                    {
+                        L.Add(1);
+                        img.Image.SetPixel(x, y, Color.FromArgb(R+1, G, B));
+                    }
+                    else if (R == 255)
+                    {
+                        L.Add(1);
+                        img.Image.SetPixel(x, y, Color.FromArgb(R - 1, G, B));
+                    }
+                    else if (R == 1 || R == 254)
+                    {
+                        L.Add(0);
+                    }
+                }
+                //Console.WriteLine("");
+            }
+        }
+        /*public void histShiffting(ref Iimage img)
         {
             Rectangle rect = new Rectangle(0, 0, img.Image.Width, img.Image.Height);
             BitmapData bmpData = img.Image.LockBits(rect, ImageLockMode.ReadWrite, img.Image.PixelFormat);
@@ -54,16 +82,16 @@ namespace TA
 
             for (int i = 0; i < rgbValues.Length; i += 4)
             {
-                byte pixelValue = (byte)((rgbValues[i] + rgbValues[i + 1] + rgbValues[i + 2]) / 3);
+                byte pixelValue = (byte)((rgbValues[i+2]));//+ rgbValues[i + 1] + rgbValues[i + 2]) / 3);
                 if (pixelValue == 0)
                 {
                     L.Add(1);
-                    rgbValues[i] = rgbValues[i + 1] = rgbValues[i + 2] = 1;
+                    rgbValues[i+2] = 1;// rgbValues[i + 1] = rgbValues[i + 2] = 1;
                 }
                 else if (pixelValue == 255)
                 {
                     L.Add(1);
-                    rgbValues[i] = rgbValues[i + 1] = rgbValues[i + 2] = 254;
+                    rgbValues[i+2] = 254;// rgbValues[i + 1] = rgbValues[i + 2] = 254;
                 }
                 else if ((pixelValue == 1) || (pixelValue == 254))
                 {
@@ -74,7 +102,7 @@ namespace TA
 
 
             img.Image.UnlockBits(bmpData);
-        }
+        }*/
 
         public void embed(ref Iimage img, string msg)
         {
@@ -92,8 +120,8 @@ namespace TA
                         R = img.Image.GetPixel(valM + j, valN + i).R;
                         G = img.Image.GetPixel(valM + j, valN + i).G;
                         B = img.Image.GetPixel(valM + j, valN + i).B;
-                        Cbi = (R + G + B) / 3;
-                        Cb1 = (img.Image.GetPixel(valM, valN).R + img.Image.GetPixel(valM, valN).G + img.Image.GetPixel(valM, valN).B) / 3;
+                        Cbi = (R);// + G + B) / 3;
+                        Cb1 = (img.Image.GetPixel(valM, valN).R);// + img.Image.GetPixel(valM, valN).G + img.Image.GetPixel(valM, valN).B) / 3;
                         diff = Cbi - Cb1;
                         //Console.WriteLine(" blok {0} N {1} M {2} diff {3} Cij {4} Ci1 {5} R {6} G {7} B {8} || ", blok, img.DefBlok[blok].N+i, img.DefBlok[blok].M+j, diff, Cbi, Cb1, R, G, B);
 
@@ -103,14 +131,14 @@ namespace TA
                         {
                             if (diff < -1)
                             {
-                                R -= 1; G -= 1; B -= 1;
+                                R -= 1;// G -= 1; B -= 1;
                                 img.Image.SetPixel(valM + j, valN + i, Color.FromArgb(R, G, B));
                             }
                             else if (diff == -1)
                             {
                                 if (n < binMsg.Length)
                                 {
-                                    R -= b; G -= b; B -= b;
+                                    R -= b; //G -= b; B -= b;
                                     img.Image.SetPixel(valM + j, valN + i, Color.FromArgb(R, G, B));
                                     n++;
                                 }
@@ -119,14 +147,14 @@ namespace TA
                             {
                                 if (n < binMsg.Length)
                                 {
-                                    R += b; G += b; B += b;
+                                    R += b; //G += b; B += b;
                                     img.Image.SetPixel(valM + j, valN + i, Color.FromArgb(R, G, B));
                                     n++;
                                 }
                             }
                             else if (diff > 0)
                             {
-                                R += 1; G += 1; B += 1;
+                                R += 1; //G += 1; B += 1;
                                 img.Image.SetPixel(valM + j, valN + i, Color.FromArgb(R, G, B));
                             }
                         }

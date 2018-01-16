@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections;
+using TA;
 
 namespace TA
 {
@@ -19,7 +20,9 @@ namespace TA
         Bitmap g;
         Iimage imgOri, imgClone,imageDec;
         ArrayList L = new ArrayList();
-        string key;
+        string key,ext;
+        Save s;
+        
 
         public win1()
         {
@@ -31,7 +34,7 @@ namespace TA
 
         private void tbDate_TextChanged(object sender, EventArgs e)
         {
-
+           
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,8 +45,13 @@ namespace TA
         private void btEncrypt_Click(object sender, EventArgs e)
         {
             imgOri = new Iimage(g);
+            s.saveImage(imgOri.Image, "OriginalImage4Encrypt.jpg");
             imgClone = imgOri;
             Encryption E = new Encryption(key, ref imgClone);
+            s.saveImage(E.StreamImage, @"..\StreamImage.jpg");
+            s.saveImage(E.PermutedImage, @"..\EncryptedImage.jpg");
+            s.saveImage(E.EmbenImage, @"..\EmbendedImage.jpg");
+            s.saveImage(imgClone.Image, @"..\MarkedEncryptedImage.jpg");
             L = E.L1;
             pbShow.Image = imgClone.Image;
 
@@ -56,24 +64,27 @@ namespace TA
             //imageDec = new Iimage(imgClone.Image);
              imageDec = imgClone;
             Decryption D = new Decryption();
-            pbLoad.Image = (Image)g;//imgOri.Image;
-           pbShow.Image = D.decryptImage(key, imageDec, L).Image;
-
+            pbLoad.Image = imageDec.Image;//(Image)g;//imgOri.Image;
+            pbShow.Image = D.decryptImage(key, imageDec, L,false).Image;
+            s.saveImage(D.OriginalImage, @"..\OriginalImageAfterDecrypt.jpg");
         }
 
         private void btOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = " Image Files(*.jpg;*.bmp;*.jpeg;*.png)|*.jpg;*.bmp;*.jpeg;*.png";
-            if(open.ShowDialog() == DialogResult.OK)
+            dt = DateTime.Now;
+            if (open.ShowDialog() == DialogResult.OK)
             {
                 pbLoad.Image = new Bitmap(open.FileName);
+                ext = open.DefaultExt;
                 g = (Bitmap) pbLoad.Image;
             }
             if (txKey.Text.Equals(""))
                 key = "198563";
             else
                 key = txKey.Text;
+            Console.WriteLine(key);
             
             PropertyItem[] prop = g.PropertyItems;
             int count = 0;
@@ -103,7 +114,7 @@ namespace TA
             imgOri = new Iimage(g);
             pbShow.Image = imgOri.Image;
             Console.WriteLine("{0} {1} ", imgOri.Image.Width, imgOri.Image.Height);*/
-
+            s = new Save (dt);
 
 
 

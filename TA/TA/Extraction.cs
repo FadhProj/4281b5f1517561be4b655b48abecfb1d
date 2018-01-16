@@ -40,15 +40,15 @@ namespace TA
 
             for (int i = 0; i < rgbValues.Length; i += 4)
             {
-                byte pixelValue = (byte)((rgbValues[i] + rgbValues[i + 1] + rgbValues[i + 2]) / 3);
+                byte pixelValue = (byte)((rgbValues[i]));// + rgbValues[i + 1] + rgbValues[i + 2]) / 3);
                 if (pixelValue == 254 && L[n].Equals(1))
                 {
-                    rgbValues[i] = rgbValues[i + 1] = rgbValues[i + 2] = 255;
+                    rgbValues[i] = 255;// rgbValues[i + 1] = rgbValues[i + 2] = 255;
                     n++;
                 }
                 else if (pixelValue == 1 && L[n].Equals(1))
                 {
-                    rgbValues[i] = rgbValues[i + 1] = rgbValues[i + 2] = 0;
+                    rgbValues[i] = 0;// rgbValues[i + 1] = rgbValues[i + 2] = 0;
                     n++;
                 }
                 else if ((pixelValue == 1) || (pixelValue == 254))
